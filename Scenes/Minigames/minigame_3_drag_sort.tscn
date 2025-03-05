@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://cs88ab7ckkfad"]
+
+[ext_resource type="Script" path="res://Scripts/ResetScene.gd" id="1_mt7ae"]
+[ext_resource type="Script" path="res://Scripts/Minigame3-DragSort/Mini3_TrashSpawner.gd" id="2_kdxg6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cbvn"]
+size = Vector2(1198, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qw3b0"]
+size = Vector2(54, 702)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0s6pn"]
+size = Vector2(1282, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxlh6"]
+size = Vector2(64, 774)
+
+[node name="Minigame3_DragSort" type="Node2D"]
+script = ExtResource("1_mt7ae")
+
+[node name="TrashSpawner" type="Node2D" parent="."]
+script = ExtResource("2_kdxg6")
+paperAmount = 30
+plasticAmount = 20
+metalAmount = 40
+
+[node name="MainCamera" type="Camera2D" parent="."]
+
+[node name="CursorSprite" type="Sprite2D" parent="."]
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="TopCollission" type="CollisionShape2D" parent="Walls"]
+position = Vector2(3, -353)
+shape = SubResource("RectangleShape2D_2cbvn")
+
+[node name="RightCollission" type="CollisionShape2D" parent="Walls"]
+position = Vector2(609, 1)
+shape = SubResource("RectangleShape2D_qw3b0")
+
+[node name="BottomCollission" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-5, 353)
+shape = SubResource("RectangleShape2D_0s6pn")
+
+[node name="LeftCollission" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-614, -9)
+shape = SubResource("RectangleShape2D_yxlh6")

@@ -1,0 +1,199 @@
+[gd_scene load_steps=28 format=3 uid="uid://ceyg4qs8vej5i"]
+
+[ext_resource type="Script" path="res://Scripts/Minigame1-TrashCatcher/Mini1_Manager.gd" id="1_q2po1"]
+[ext_resource type="Script" path="res://Scripts/Minigame1-TrashCatcher/Mini1_TrashSpawner.gd" id="2_2qf3n"]
+[ext_resource type="Script" path="res://Scripts/Minigame1-TrashCatcher/Mini1_TrashBin.gd" id="3_tac2r"]
+[ext_resource type="AnimationLibrary" uid="uid://xyooesyq3k1b" path="res://Animations/Minigame1.res" id="4_25uyv"]
+[ext_resource type="Script" path="res://Scripts/Minigame1-TrashCatcher/Mini1_BinAnimations.gd" id="5_3wney"]
+[ext_resource type="Texture2D" uid="uid://m018ji7fym6u" path="res://Art/Minigame1/PaperBinFront.png" id="6_no864"]
+[ext_resource type="Texture2D" uid="uid://c577bio2uipp2" path="res://Art/Minigame1/PaperBinBack.png" id="7_5ud7s"]
+[ext_resource type="Texture2D" uid="uid://cb56tm6665a4g" path="res://Art/Minigame1/PlasticBinFront.png" id="8_jkjy3"]
+[ext_resource type="Texture2D" uid="uid://duodcn81kqapk" path="res://Art/Minigame1/PlasticBinBack.png" id="9_y0yv8"]
+[ext_resource type="Texture2D" uid="uid://bbolwnwfpip40" path="res://Art/Minigame1/MetalBinFront.png" id="10_4rf81"]
+[ext_resource type="Texture2D" uid="uid://bjly1wraoscq3" path="res://Art/Minigame1/MetalBinBack.png" id="11_i6y5h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_b0u0n"]
+font_size = 32
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xg4e4"]
+size = Vector2(5, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_osam4"]
+size = Vector2(10, 80)
+
+[sub_resource type="Animation" id="Animation_1imj6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bins:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lisfg"]
+_data = {
+"RESET": SubResource("Animation_1imj6")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p2g2x"]
+animation = &"Minigame1/BinDown"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u0u61"]
+animation = &"Minigame1/BinIdle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5oodw"]
+animation = &"Minigame1/BinUp"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bqcur"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_smk6l"]
+advance_mode = 2
+advance_expression = "down == true"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dxr31"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_84r6p"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6nnht"]
+states/Minigame1_BinDown/node = SubResource("AnimationNodeAnimation_p2g2x")
+states/Minigame1_BinDown/position = Vector2(440, 164)
+states/Minigame1_BinIdle/node = SubResource("AnimationNodeAnimation_u0u61")
+states/Minigame1_BinIdle/position = Vector2(576, 55)
+states/Minigame1_BinUp/node = SubResource("AnimationNodeAnimation_5oodw")
+states/Minigame1_BinUp/position = Vector2(704, 164)
+states/Start/position = Vector2(241, 100)
+transitions = ["Start", "Minigame1_BinIdle", SubResource("AnimationNodeStateMachineTransition_bqcur"), "Minigame1_BinIdle", "Minigame1_BinDown", SubResource("AnimationNodeStateMachineTransition_smk6l"), "Minigame1_BinDown", "Minigame1_BinUp", SubResource("AnimationNodeStateMachineTransition_dxr31"), "Minigame1_BinUp", "Minigame1_BinIdle", SubResource("AnimationNodeStateMachineTransition_84r6p")]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j80wt"]
+size = Vector2(172, 27.471)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8bvg"]
+size = Vector2(24, 324)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sl6l0"]
+size = Vector2(24, 324)
+
+[node name="Minigame1-TrashCatcher" type="Node2D" node_paths=PackedStringArray("bins", "scoreLabel")]
+script = ExtResource("1_q2po1")
+bins = NodePath("TrashCan")
+scoreLabel = NodePath("GUI/Score")
+
+[node name="TrashSpawner" type="Node2D" parent="." node_paths=PackedStringArray("timer")]
+script = ExtResource("2_2qf3n")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="TrashSpawner"]
+autostart = true
+
+[node name="MainCamera" type="Camera2D" parent="."]
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Score" type="Label" parent="GUI"]
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 144.0
+offset_bottom = 95.0
+text = "Score:"
+label_settings = SubResource("LabelSettings_b0u0n")
+
+[node name="TrashCan" type="CharacterBody2D" parent="." node_paths=PackedStringArray("PaperBin", "PlasticBin", "MetalBin", "animPlayer", "animTree")]
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("3_tac2r")
+SPEED = 1000
+PaperBin = NodePath("Bins/PaperSpriteFront")
+PlasticBin = NodePath("Bins/PlasticSpriteFront")
+MetalBin = NodePath("Bins/MetalSpriteFront")
+animPlayer = NodePath("AnimationPlayer")
+animTree = NodePath("AnimationPlayer/AnimationTree")
+
+[node name="BinCollissionRight" type="CollisionShape2D" parent="TrashCan"]
+position = Vector2(131.5, 208)
+shape = SubResource("RectangleShape2D_xg4e4")
+
+[node name="BinCollissionLeft" type="CollisionShape2D" parent="TrashCan"]
+position = Vector2(-123, 188)
+shape = SubResource("RectangleShape2D_osam4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TrashCan"]
+libraries = {
+"": SubResource("AnimationLibrary_lisfg"),
+"Minigame1": ExtResource("4_25uyv")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="TrashCan/AnimationPlayer"]
+root_node = NodePath("../..")
+tree_root = SubResource("AnimationNodeStateMachine_6nnht")
+anim_player = NodePath("..")
+script = ExtResource("5_3wney")
+
+[node name="Bins" type="CharacterBody2D" parent="TrashCan"]
+
+[node name="PaperSpriteFront" type="Sprite2D" parent="TrashCan/Bins"]
+z_index = 1
+position = Vector2(0, 200)
+scale = Vector2(3, 2.5)
+texture = ExtResource("6_no864")
+
+[node name="PaperSpiteBack" type="Sprite2D" parent="TrashCan/Bins/PaperSpriteFront"]
+z_index = -1
+texture = ExtResource("7_5ud7s")
+
+[node name="PlasticSpriteFront" type="Sprite2D" parent="TrashCan/Bins"]
+visible = false
+z_index = 1
+position = Vector2(0, 200)
+scale = Vector2(3, 2.5)
+texture = ExtResource("8_jkjy3")
+
+[node name="PlasticSpriteBack" type="Sprite2D" parent="TrashCan/Bins/PlasticSpriteFront"]
+z_index = -1
+texture = ExtResource("9_y0yv8")
+
+[node name="MetalSpriteFront" type="Sprite2D" parent="TrashCan/Bins"]
+visible = false
+z_index = 1
+position = Vector2(0, 200)
+scale = Vector2(3, 2.5)
+texture = ExtResource("10_4rf81")
+
+[node name="MetalSpriteBack" type="Sprite2D" parent="TrashCan/Bins/MetalSpriteFront"]
+z_index = -1
+texture = ExtResource("11_i6y5h")
+
+[node name="RimCollission" type="CollisionPolygon2D" parent="TrashCan/Bins"]
+polygon = PackedVector2Array(-106, 147, -90, 312, 110, 304, 116, 144, 134, 141, 135, 331, -113, 331, -129, 141)
+
+[node name="InteriorArea" type="Area2D" parent="TrashCan/Bins"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrashCan/Bins/InteriorArea"]
+position = Vector2(9, 291.615)
+shape = SubResource("RectangleShape2D_j80wt")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 128
+collision_mask = 128
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-592, 162)
+shape = SubResource("RectangleShape2D_h8bvg")
+
+[node name="Right" type="CollisionShape2D" parent="Walls"]
+position = Vector2(593, 161.5)
+shape = SubResource("RectangleShape2D_sl6l0")
+
+[connection signal="timeout" from="TrashSpawner/Timer" to="TrashSpawner" method="_on_timer_timeout"]
+[connection signal="animation_finished" from="TrashCan/AnimationPlayer/AnimationTree" to="TrashCan" method="_on_animation_tree_animation_finished"]
+[connection signal="body_entered" from="TrashCan/Bins/InteriorArea" to="." method="_on_interior_area_body_entered"]

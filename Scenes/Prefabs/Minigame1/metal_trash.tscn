@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnmbwkktelknc"]
+
+[ext_resource type="Texture2D" uid="uid://od0335c5v6ho" path="res://Art/Minigame1/TempMetal.png" id="1_ab3ty"]
+
+[node name="MetalTrash" type="RigidBody2D"]
+gravity_scale = 0.25
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ab3ty")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-29, -53, -61, -32, 39, 40, 61, 14)

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3d3fhu3574jf"]
+
+[ext_resource type="Texture2D" uid="uid://bdrajnklbtvlp" path="res://Art/Minigame1/TempPaper.png" id="1_hj3f6"]
+
+[node name="PaperTrash" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hj3f6")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-20, -53, -47, -29, 35, 52, 56, 36)
