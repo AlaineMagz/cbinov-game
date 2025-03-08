@@ -1,28 +1,31 @@
-[gd_scene load_steps=7 format=3 uid="uid://cs88ab7ckkfad"]
+[gd_scene load_steps=12 format=3 uid="uid://cs88ab7ckkfad"]
 
-[ext_resource type="Script" path="res://Scripts/ResetScene.gd" id="1_mt7ae"]
+[ext_resource type="Script" path="res://Scripts/Minigame3-DragSort/Mini3_Manager.gd" id="1_i1t1k"]
 [ext_resource type="Script" path="res://Scripts/Minigame3-DragSort/Mini3_TrashSpawner.gd" id="2_kdxg6"]
+[ext_resource type="Script" path="res://Scripts/Minigame3-DragSort/Mini3_Bin.gd" id="3_ackva"]
+[ext_resource type="Texture2D" uid="uid://bxtvx1y3u3wam" path="res://Art/Minigame3/PaperBinFront.png" id="3_c3l80"]
+[ext_resource type="Texture2D" uid="uid://bnridmku0of01" path="res://Art/Minigame3/PaperBinBack.png" id="4_76sus"]
+[ext_resource type="Texture2D" uid="uid://cduwmgw5p4so8" path="res://Art/Minigame3/PlasticBinFront.png" id="5_mrikc"]
+[ext_resource type="Texture2D" uid="uid://cbn6es4766gle" path="res://Art/Minigame3/PlasticBinBack.png" id="6_qjopv"]
+[ext_resource type="Texture2D" uid="uid://dmjq5yi1nhiub" path="res://Art/Minigame3/MetalBinFront.png" id="7_x711y"]
+[ext_resource type="Texture2D" uid="uid://ctf4nn56iiik5" path="res://Art/Minigame3/MetalBinBack.png" id="8_7s2st"]
+[ext_resource type="Texture2D" uid="uid://7wy1mnj81obq" path="res://Art/Minigame3/Table.png" id="9_orr30"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cbvn"]
-size = Vector2(1198, 46)
+[sub_resource type="LabelSettings" id="LabelSettings_8ntg4"]
+font_size = 32
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qw3b0"]
-size = Vector2(54, 702)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0s6pn"]
-size = Vector2(1282, 50)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxlh6"]
-size = Vector2(64, 774)
-
-[node name="Minigame3_DragSort" type="Node2D"]
-script = ExtResource("1_mt7ae")
+[node name="Minigame3_DragSort" type="Node2D" node_paths=PackedStringArray("scoreLabel")]
+script = ExtResource("1_i1t1k")
+scoreLabel = NodePath("GUI/Label")
 
 [node name="TrashSpawner" type="Node2D" parent="."]
 script = ExtResource("2_kdxg6")
-paperAmount = 30
-plasticAmount = 20
-metalAmount = 40
+paperAmount = 10
+plasticAmount = 10
+metalAmount = 10
+maxYSpawn = 0
 
 [node name="MainCamera" type="Camera2D" parent="."]
 
@@ -30,20 +33,86 @@ metalAmount = 40
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="Walls" type="StaticBody2D" parent="."]
+[node name="Label" type="Label" parent="GUI"]
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 98.0
+offset_bottom = 73.0
+text = "Score:"
+label_settings = SubResource("LabelSettings_8ntg4")
 
-[node name="TopCollission" type="CollisionShape2D" parent="Walls"]
-position = Vector2(3, -353)
-shape = SubResource("RectangleShape2D_2cbvn")
+[node name="Graphics" type="Node2D" parent="."]
 
-[node name="RightCollission" type="CollisionShape2D" parent="Walls"]
-position = Vector2(609, 1)
-shape = SubResource("RectangleShape2D_qw3b0")
+[node name="PaperBin" type="Area2D" parent="Graphics"]
+collision_mask = 129
+script = ExtResource("3_ackva")
+bin = "paper"
+midPoint = -350
 
-[node name="BottomCollission" type="CollisionShape2D" parent="Walls"]
-position = Vector2(-5, 353)
-shape = SubResource("RectangleShape2D_0s6pn")
+[node name="PaperBinFront" type="Sprite2D" parent="Graphics/PaperBin"]
+z_index = 4096
+position = Vector2(-350, 250)
+scale = Vector2(3, 3)
+texture = ExtResource("3_c3l80")
 
-[node name="LeftCollission" type="CollisionShape2D" parent="Walls"]
-position = Vector2(-614, -9)
-shape = SubResource("RectangleShape2D_yxlh6")
+[node name="PaperBinBack" type="Sprite2D" parent="Graphics/PaperBin"]
+z_index = -1
+position = Vector2(-350, 250)
+scale = Vector2(3, 3)
+texture = ExtResource("4_76sus")
+
+[node name="PaperArea" type="CollisionPolygon2D" parent="Graphics/PaperBin"]
+polygon = PackedVector2Array(-460, 80, -252, 67, -251, 424, -421, 427)
+
+[node name="PlasticBin" type="Area2D" parent="Graphics"]
+collision_mask = 129
+script = ExtResource("3_ackva")
+bin = "plastic"
+
+[node name="Front" type="Sprite2D" parent="Graphics/PlasticBin"]
+z_index = 4096
+position = Vector2(0, 250)
+scale = Vector2(3, 3)
+texture = ExtResource("5_mrikc")
+
+[node name="Back" type="Sprite2D" parent="Graphics/PlasticBin"]
+z_index = -1
+position = Vector2(0, 250)
+scale = Vector2(3, 3)
+texture = ExtResource("6_qjopv")
+
+[node name="PlasticArea" type="CollisionPolygon2D" parent="Graphics/PlasticBin"]
+polygon = PackedVector2Array(-111, 65, 110, 57, 95, 420, -73, 422)
+
+[node name="MetalBin" type="Area2D" parent="Graphics"]
+collision_mask = 129
+script = ExtResource("3_ackva")
+bin = "metal"
+midPoint = 350
+
+[node name="Front" type="Sprite2D" parent="Graphics/MetalBin"]
+z_index = 4096
+position = Vector2(350, 250)
+scale = Vector2(3, 3)
+texture = ExtResource("7_x711y")
+
+[node name="Back" type="Sprite2D" parent="Graphics/MetalBin"]
+z_index = -1
+position = Vector2(350, 250)
+scale = Vector2(3, 3)
+texture = ExtResource("8_7s2st")
+
+[node name="MetalArea" type="CollisionPolygon2D" parent="Graphics/MetalBin"]
+polygon = PackedVector2Array(248, 61, 451, 59, 450, 429, 285, 419)
+
+[node name="Table" type="Sprite2D" parent="Graphics"]
+z_index = -2
+scale = Vector2(1.695, 1.695)
+texture = ExtResource("9_orr30")
+
+[connection signal="body_entered" from="Graphics/PaperBin" to="Graphics/PaperBin" method="_on_body_entered"]
+[connection signal="body_exited" from="Graphics/PaperBin" to="Graphics/PaperBin" method="_on_body_exited"]
+[connection signal="body_entered" from="Graphics/PlasticBin" to="Graphics/PlasticBin" method="_on_body_entered"]
+[connection signal="body_exited" from="Graphics/PlasticBin" to="Graphics/PlasticBin" method="_on_body_exited"]
+[connection signal="body_entered" from="Graphics/MetalBin" to="Graphics/MetalBin" method="_on_body_entered"]
+[connection signal="body_exited" from="Graphics/MetalBin" to="Graphics/MetalBin" method="_on_body_exited"]

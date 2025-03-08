@@ -13,6 +13,7 @@ var totalTrash: int
 @export var minYSpawn: int = -250
 @export var maxYSpawn: int = 250
 
+@onready var manager = get_parent()
 @onready var paperTrash = preload("res://Scenes/Prefabs/Minigame3/paper_trash.tscn")
 @onready var plasticTrash = preload("res://Scenes/Prefabs/Minigame3/plastic_trash.tscn")
 @onready var metalTrash = preload("res://Scenes/Prefabs/Minigame3/metal_trash.tscn")
@@ -37,7 +38,9 @@ func insertTrash(type : String):
 	newTrash.name = "pickable" + type + str(randX) + str(randY) + str(totalTrash)
 	newTrash.rotation_degrees = randi_range(0,359)
 	newTrash.z_index = totalTrash
+	newTrash.manager = manager
 	add_child(newTrash)
+	manager.trashList.append(newTrash)
 	
 
 func spawnTrash():
@@ -58,6 +61,8 @@ func spawnTrash():
 	
 
 func _ready():
+	
+	manager.topIndex = totalTrash
 	
 	var done = false
 	

@@ -1,7 +1,12 @@
+res://Scenes/Prefabs/Minigame3/plastic_trash.tscn
+res://Scenes/Prefabs/Minigame3/paper_trash.tscn
+res://Scenes/Prefabs/Minigame3/metal_trash.tscn
 res://Scenes/Minigames/minigame_3_drag_sort.tscn
 res://Scenes/Minigames/minigame_1_trash_catcher.tscn
-res://Scripts/Minigame1-TrashCatcher/Mini1_TrashSpawner.gd
+res://Scripts/Minigame3-DragSort/Mini3_Manager.gd
+res://Scripts/Minigame3-DragSort/Mini3_Trash.gd
 res://Scripts/Minigame3-DragSort/Mini3_TrashSpawner.gd
-res://Scenes/Prefabs/Minigame3/metal_trash.tscn
-res://Scenes/Prefabs/Minigame3/paper_trash.tscn
-res://Scenes/Prefabs/Minigame3/plastic_trash.tscn
+res://Shaders/outline.gdshader
+res://Shaders/OutlineShaderMat.tres
+res://Scripts/Minigame3-DragSort/Mini3_PaperBin.gd
+res://Scripts/Minigame3-DragSort/Mini3_Bin.gd

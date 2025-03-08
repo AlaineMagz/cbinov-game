@@ -1,11 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://jg88rbke78nh"]
+[gd_scene load_steps=3 format=3 uid="uid://jg88rbke78nh"]
 
 [ext_resource type="Texture2D" uid="uid://dbiv1c1k77w6m" path="res://Art/Minigame1/TempPlastic.png" id="1_7lsoo"]
+[ext_resource type="Script" path="res://Scripts/Minigame3-DragSort/Mini3_Trash.gd" id="1_tfn4j"]
 
 [node name="PlasticTrash" type="CharacterBody2D"]
+collision_layer = 128
+collision_mask = 128
+input_pickable = true
+script = ExtResource("1_tfn4j")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_7lsoo")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-29, -49, -50, -42, -38, -20, 14, 32, 39, 45, 55, 26, 50, 15, 7, -12, -19, -35)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
