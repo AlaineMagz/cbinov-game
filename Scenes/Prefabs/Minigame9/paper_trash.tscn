@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp6rsadddrkt3"]
+
+[ext_resource type="Script" path="res://Scripts/Minigame9-FindTrash/Mini9_Trash.gd" id="1_n5qit"]
+[ext_resource type="Texture2D" uid="uid://blrmmppwn84o1" path="res://Art/Minigame 9/TempPaper.png" id="2_7n6sm"]
+
+[node name="PaperTrash" type="CharacterBody2D"]
+collision_layer = 128
+collision_mask = 128
+input_pickable = true
+script = ExtResource("1_n5qit")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7n6sm")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-20, -53, -47, -29, 35, 52, 56, 36)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

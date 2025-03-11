@@ -14,9 +14,9 @@ var totalTrash: int
 @export var maxYSpawn: int = 250
 
 @onready var manager = get_parent()
-@onready var paperTrash = preload("res://Scenes/Prefabs/Minigame3/paper_trash.tscn")
-@onready var plasticTrash = preload("res://Scenes/Prefabs/Minigame3/plastic_trash.tscn")
-@onready var metalTrash = preload("res://Scenes/Prefabs/Minigame3/metal_trash.tscn")
+@onready var paperTrash = preload("res://Scenes/Prefabs/Minigame9/paper_trash.tscn")
+@onready var plasticTrash = preload("res://Scenes/Prefabs/Minigame9/plastic_trash.tscn")
+@onready var metalTrash = preload("res://Scenes/Prefabs/Minigame9/metal_trash.tscn")
 
 func insertTrash(type : String):
 	

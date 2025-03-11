@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://i17635j8pyp4"]
+
+[ext_resource type="Script" path="res://Scripts/Minigame9-FindTrash/Mini9_Manager.gd" id="1_ngfwc"]
+[ext_resource type="Script" path="res://Scripts/Minigame9-FindTrash/Mini9_TrashSpawner.gd" id="2_b0swq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_15ra0"]
+font_size = 24
+
+[node name="Minigame9_FindTrash" type="Node2D"]
+script = ExtResource("1_ngfwc")
+
+[node name="TrashSpawner" type="Node2D" parent="."]
+script = ExtResource("2_b0swq")
+paperAmount = 30
+plasticAmount = 30
+metalAmount = 30
+minXSpawn = -300
+
+[node name="MainCamera" type="Camera2D" parent="."]
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 415.0
+offset_right = -922.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="GUI/Panel"]
+
+[node name="Label" type="Label" parent="GUI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -36.0
+offset_right = 38.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Find This Trash:      "
+label_settings = SubResource("LabelSettings_15ra0")
