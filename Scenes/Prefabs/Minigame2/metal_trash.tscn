@@ -1,0 +1,24 @@
+[gd_scene load_steps=8 format=3 uid="uid://d06fjk0svnmh3"]
+
+[ext_resource type="Script" path="res://Scripts/Trash/trash_random.gd" id="1_pbb6l"]
+[ext_resource type="PhysicsMaterial" uid="uid://bqhkskv7sce5w" path="res://PhysicsMats/Bounce.tres" id="1_snsmg"]
+[ext_resource type="Texture2D" uid="uid://lfs6jvqve1b2" path="res://Art/Trash/MetalOneTrash.png" id="2_wjwgh"]
+[ext_resource type="Texture2D" uid="uid://drs3jlf0bfvva" path="res://Art/Trash/MetalTwoTrash.png" id="3_bn1ye"]
+[ext_resource type="Script" path="res://Scripts/CollisionPolygonResource.gd" id="5_i83ds"]
+[ext_resource type="Resource" uid="uid://dmeootsl1u342" path="res://Collision/Metal/MetalOne.tres" id="6_pkfs6"]
+[ext_resource type="Resource" uid="uid://6m7twn44d00u" path="res://Collision/Metal/MetalTwo.tres" id="7_e2a6o"]
+
+[node name="MetalTrash" type="RigidBody2D" node_paths=PackedStringArray("sprite")]
+physics_material_override = ExtResource("1_snsmg")
+gravity_scale = 0.25
+script = ExtResource("1_pbb6l")
+sprite = NodePath("Sprite2D")
+trashSprites = Array[Texture2D]([ExtResource("2_wjwgh"), ExtResource("3_bn1ye")])
+trashCollision = Array[ExtResource("5_i83ds")]([ExtResource("6_pkfs6"), ExtResource("7_e2a6o")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_bn1ye")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(21, 4, 14, -14, 11, -25, 7, -32, -6, -31, -18, -26, -24, -21, -24, -13, -22, 3, -12, 26, -7, 32, 4, 32, 14, 30, 23, 24, 25, 17)

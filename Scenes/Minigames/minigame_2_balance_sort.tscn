@@ -1,0 +1,133 @@
+[gd_scene load_steps=15 format=3 uid="uid://lhjy1o10x0kg"]
+
+[ext_resource type="Script" path="res://Scripts/Minigame2-BalanceBeam/Mini2_Manager.gd" id="1_1jtfa"]
+[ext_resource type="Script" path="res://Scripts/Minigame2-BalanceBeam/Mini2_TrashSpawner.gd" id="1_70b35"]
+[ext_resource type="Script" path="res://Scripts/Minigame2-BalanceBeam/Mini2_BalanceBeam.gd" id="2_tbs51"]
+[ext_resource type="Texture2D" uid="uid://bffps3jaawrgj" path="res://Art/Beam.png" id="3_x6wh5"]
+[ext_resource type="Texture2D" uid="uid://dkdhjg333xa11" path="res://Art/Bins/RecycleBinFront.png" id="4_blxsh"]
+[ext_resource type="Texture2D" uid="uid://dmbps3dfv0pvc" path="res://Art/Backgrounds/Polka.png" id="4_rmmlc"]
+[ext_resource type="Script" path="res://Scripts/Background/RainbowPolka.gd" id="5_chkry"]
+[ext_resource type="Texture2D" uid="uid://dhhc3yrdm3v3j" path="res://Art/Bins/RecycleBinBack.png" id="5_q6qlp"]
+[ext_resource type="Texture2D" uid="uid://0qvk0ulbssvo" path="res://Art/Bins/NonRecyclableBinFront.png" id="6_vxta0"]
+[ext_resource type="Texture2D" uid="uid://vncehqsqg5f" path="res://Art/Bins/NonRecyclableBinBack.png" id="7_13oj2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_b0u0n"]
+font_size = 32
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_iui1f"]
+friction = 0.2
+bounce = 0.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1mib"]
+size = Vector2(574, 18)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qxwwt"]
+bounce = 0.25
+absorbent = true
+
+[node name="Minigame2_BalanceSort" type="Node2D" node_paths=PackedStringArray("scoreLabel")]
+script = ExtResource("1_1jtfa")
+scoreLabel = NodePath("GUI/Score")
+
+[node name="TrashSpawner" type="Node2D" parent="." node_paths=PackedStringArray("timer")]
+script = ExtResource("1_70b35")
+spawnSpeed = 3.0
+organicTrashWeight = 2
+minXSpawn = 0
+maxXSpawn = 0
+ySpawn = -800
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="TrashSpawner"]
+autostart = true
+
+[node name="MainCamera" type="Camera2D" parent="."]
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Score" type="Label" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Score: "
+label_settings = SubResource("LabelSettings_b0u0n")
+
+[node name="BalanceBeam" type="RigidBody2D" parent="."]
+position = Vector2(0, 50)
+physics_material_override = SubResource("PhysicsMaterial_iui1f")
+freeze = true
+freeze_mode = 1
+script = ExtResource("2_tbs51")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BalanceBeam"]
+shape = SubResource("RectangleShape2D_e1mib")
+
+[node name="Sprite2D" type="Sprite2D" parent="BalanceBeam"]
+self_modulate = Color(0.3484, 0.751439, 0, 1)
+scale = Vector2(1, 0.219)
+texture = ExtResource("3_x6wh5")
+
+[node name="Bins" type="Node2D" parent="."]
+
+[node name="Bin" type="CharacterBody2D" parent="Bins"]
+
+[node name="LeftBin" type="CollisionPolygon2D" parent="Bins/Bin"]
+polygon = PackedVector2Array(-366, 201, -374, 198, -397, 352, -516, 356, -543, 203, -554, 204, -536, 369, -382, 370)
+
+[node name="Sprite2D" type="Sprite2D" parent="Bins/Bin/LeftBin"]
+z_index = 2
+position = Vector2(-459, 304)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_blxsh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bins/Bin/LeftBin/Sprite2D"]
+z_index = -2
+position = Vector2(-8.81, 0)
+texture = ExtResource("5_q6qlp")
+
+[node name="InteriorLeft" type="Area2D" parent="Bins/Bin/LeftBin"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bins/Bin/LeftBin/InteriorLeft"]
+polygon = PackedVector2Array(-522, 321, -509, 398, -395, 417, -396, 328)
+
+[node name="RightBin" type="CollisionPolygon2D" parent="Bins/Bin"]
+polygon = PackedVector2Array(365, 207, 374, 208, 392, 351, 526, 355, 543, 207, 551, 208, 534, 374, 380, 372)
+
+[node name="Sprite2D" type="Sprite2D" parent="Bins/Bin/RightBin"]
+z_index = 2
+position = Vector2(459, 304)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("6_vxta0")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bins/Bin/RightBin/Sprite2D"]
+z_index = -2
+position = Vector2(-22.6667, 20)
+texture = ExtResource("7_13oj2")
+
+[node name="InteriorRight" type="Area2D" parent="Bins/Bin/RightBin"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bins/Bin/RightBin/InteriorRight"]
+polygon = PackedVector2Array(392, 327, 524, 332, 511, 387, 416, 389)
+
+[node name="Background" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.9, 0.9, 1)
+z_index = -3
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("4_rmmlc")
+script = ExtResource("5_chkry")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_qxwwt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
+polygon = PackedVector2Array(-575, -327, -575, 321, -591, 2679, 642, 2668, 577, 318, 584, -323, 745, -325, 755, 2736, -732, 2747, -718, -317)
+
+[connection signal="timeout" from="TrashSpawner/Timer" to="TrashSpawner" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Bins/Bin/LeftBin/InteriorLeft" to="." method="_on_interior_left_body_entered"]
+[connection signal="body_entered" from="Bins/Bin/RightBin/InteriorRight" to="." method="_on_interior_right_body_entered"]

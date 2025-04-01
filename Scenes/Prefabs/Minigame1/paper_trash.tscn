@@ -1,9 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://boi16vq0j4aw6"]
+[gd_scene load_steps=6 format=3 uid="uid://boi16vq0j4aw6"]
 
 [ext_resource type="Texture2D" uid="uid://bdrajnklbtvlp" path="res://Art/Minigame1/TempPaper.png" id="1_gpe2v"]
+[ext_resource type="Script" path="res://Scripts/Trash/trash_random.gd" id="1_siq06"]
+[ext_resource type="Texture2D" uid="uid://ievsbw2jjf5l" path="res://Art/Trash/PaperOneTrash.png" id="2_a1q3f"]
+[ext_resource type="Texture2D" uid="uid://1iq4wrwk5ouk" path="res://Art/Trash/PaperThreeTrash.png" id="3_f8c2x"]
+[ext_resource type="Texture2D" uid="uid://cfwmcmubbxxfq" path="res://Art/Trash/PaperTwoTrash.png" id="4_r0ijy"]
 
-[node name="PaperTrash" type="RigidBody2D"]
+[node name="PaperTrash" type="RigidBody2D" node_paths=PackedStringArray("sprite")]
 gravity_scale = 0.25
+script = ExtResource("1_siq06")
+sprite = NodePath("Sprite2D")
+trashSprites = Array[Texture2D]([ExtResource("2_a1q3f"), ExtResource("3_f8c2x"), ExtResource("4_r0ijy")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_gpe2v")

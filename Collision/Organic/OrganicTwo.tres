@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="CollisionPolygonRes" load_steps=2 format=3 uid="uid://b0hxcjyuyujna"]
+
+[ext_resource type="Script" path="res://Scripts/CollisionPolygonResource.gd" id="1_yll34"]
+
+[resource]
+script = ExtResource("1_yll34")
+polygon = PackedVector2Array(-27, 29, -26, 22, -15, 21, -15, -9, -35, -10, -35, -16, -16, -26, -22, -36, -20, -39, -8, -35, -6, -41, -4, -41, -1, -41, -1, -24, 13, -30, 25, -29, 37, -22, 36, -18, 18, -11, 20, 20, 34, 23, 35, 26, 23, 39, -6, 40, -18, 38)

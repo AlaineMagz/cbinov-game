@@ -1,20 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://cp6dhx0xlra8i"]
+[gd_scene load_steps=7 format=3 uid="uid://cp6dhx0xlra8i"]
 
-[ext_resource type="Script" path="res://Scripts/Minigame3-DragSort/Mini3_Trash.gd" id="1_ckmyd"]
-[ext_resource type="Texture2D" uid="uid://od0335c5v6ho" path="res://Art/Minigame1/TempMetal.png" id="1_yxokc"]
+[ext_resource type="Script" path="res://Scripts/Trash/draggable_trash_random.gd" id="1_g752a"]
+[ext_resource type="Texture2D" uid="uid://lfs6jvqve1b2" path="res://Art/Trash/MetalOneTrash.png" id="2_1up6f"]
+[ext_resource type="Texture2D" uid="uid://drs3jlf0bfvva" path="res://Art/Trash/MetalTwoTrash.png" id="3_qu031"]
+[ext_resource type="Script" path="res://Scripts/CollisionPolygonResource.gd" id="4_31qhm"]
+[ext_resource type="Resource" uid="uid://dmeootsl1u342" path="res://Collision/Metal/MetalOne.tres" id="5_6gdut"]
+[ext_resource type="Resource" uid="uid://6m7twn44d00u" path="res://Collision/Metal/MetalTwo.tres" id="6_a5mcw"]
 
 [node name="MetalTrash" type="CharacterBody2D"]
 collision_layer = 128
 collision_mask = 128
 input_pickable = true
-script = ExtResource("1_ckmyd")
+script = ExtResource("1_g752a")
+trashSprites = Array[Texture2D]([ExtResource("2_1up6f"), ExtResource("3_qu031")])
+trashCollision = Array[ExtResource("4_31qhm")]([ExtResource("5_6gdut"), ExtResource("6_a5mcw")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_yxokc")
+texture = ExtResource("3_qu031")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
-polygon = PackedVector2Array(-29, -53, -61, -32, 39, 40, 61, 14)
+polygon = PackedVector2Array(28, -31, 22, -48, 14, -65, 1, -64, -16, -58, -33, -52, -49, -38, -49, -22, -41, 10, -27, 47, -17, 60, 3, 66, 38, 53, 51, 43, 35, -10)
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

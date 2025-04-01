@@ -1,0 +1,25 @@
+[gd_scene load_steps=10 format=3 uid="uid://d2vm3ngum20di"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://bqhkskv7sce5w" path="res://PhysicsMats/Bounce.tres" id="1_72v6q"]
+[ext_resource type="Script" path="res://Scripts/Trash/trash_random.gd" id="1_v6msu"]
+[ext_resource type="Texture2D" uid="uid://ievsbw2jjf5l" path="res://Art/Trash/PaperOneTrash.png" id="2_i0ghb"]
+[ext_resource type="Texture2D" uid="uid://1iq4wrwk5ouk" path="res://Art/Trash/PaperThreeTrash.png" id="3_oppy3"]
+[ext_resource type="Texture2D" uid="uid://cfwmcmubbxxfq" path="res://Art/Trash/PaperTwoTrash.png" id="4_7abqh"]
+[ext_resource type="Script" path="res://Scripts/CollisionPolygonResource.gd" id="6_1lce5"]
+[ext_resource type="Resource" uid="uid://b7dm5a4bnfvuc" path="res://Collision/Paper/PaperOne.tres" id="7_04osg"]
+[ext_resource type="Resource" uid="uid://bikie30csvvg1" path="res://Collision/Paper/PaperThree.tres" id="8_0h3a6"]
+[ext_resource type="Resource" uid="uid://b1cf72dlnixqx" path="res://Collision/Paper/PaperTwo.tres" id="9_utrpt"]
+
+[node name="PaperTrash" type="RigidBody2D" node_paths=PackedStringArray("sprite")]
+physics_material_override = ExtResource("1_72v6q")
+gravity_scale = 0.25
+script = ExtResource("1_v6msu")
+sprite = NodePath("Sprite2D")
+trashSprites = Array[Texture2D]([ExtResource("2_i0ghb"), ExtResource("3_oppy3"), ExtResource("4_7abqh")])
+trashCollision = Array[ExtResource("6_1lce5")]([ExtResource("7_04osg"), ExtResource("8_0h3a6"), ExtResource("9_utrpt")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("2_i0ghb")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]

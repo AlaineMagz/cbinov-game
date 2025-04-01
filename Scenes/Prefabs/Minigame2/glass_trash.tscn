@@ -1,0 +1,24 @@
+[gd_scene load_steps=8 format=3 uid="uid://djqw13bsqmb3x"]
+
+[ext_resource type="Script" path="res://Scripts/Trash/trash_random.gd" id="1_1pkq5"]
+[ext_resource type="PhysicsMaterial" uid="uid://bqhkskv7sce5w" path="res://PhysicsMats/Bounce.tres" id="1_ekt6y"]
+[ext_resource type="Texture2D" uid="uid://dnphg4j3turm" path="res://Art/Trash/GlassOneTrash.png" id="2_afl2d"]
+[ext_resource type="Texture2D" uid="uid://dieea71u3ijku" path="res://Art/Trash/GlassTwoTrash.png" id="3_rlwhq"]
+[ext_resource type="Script" path="res://Scripts/CollisionPolygonResource.gd" id="5_84ouc"]
+[ext_resource type="Resource" uid="uid://njav5pn6qnup" path="res://Collision/Glass/GlassOne.tres" id="6_tb6q6"]
+[ext_resource type="Resource" uid="uid://dhldewms7amex" path="res://Collision/Glass/GlassTwo.tres" id="7_v5jbh"]
+
+[node name="GlassTrash" type="RigidBody2D" node_paths=PackedStringArray("sprite")]
+physics_material_override = ExtResource("1_ekt6y")
+gravity_scale = 0.25
+script = ExtResource("1_1pkq5")
+sprite = NodePath("Sprite2D")
+trashSprites = Array[Texture2D]([ExtResource("2_afl2d"), ExtResource("3_rlwhq")])
+trashCollision = Array[ExtResource("5_84ouc")]([ExtResource("6_tb6q6"), ExtResource("7_v5jbh")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_rlwhq")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-29, 28, -23, 16, -22, 3, -19, -4, -16, -21, -20, -35, -19, -38, -11, -41, 3, -40, 5, -37, 2, -34, 3, -22, 9, -10, 19, -2, 21, 3, 30, 26, 30, 30, 24, 34, 11, 36, -24, 39, -30, 35)

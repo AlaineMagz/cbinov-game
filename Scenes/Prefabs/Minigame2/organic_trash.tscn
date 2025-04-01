@@ -1,0 +1,26 @@
+[gd_scene load_steps=10 format=3 uid="uid://dkapuwe4xd0y5"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://bqhkskv7sce5w" path="res://PhysicsMats/Bounce.tres" id="1_18yf0"]
+[ext_resource type="Script" path="res://Scripts/Trash/trash_random.gd" id="1_natel"]
+[ext_resource type="Texture2D" uid="uid://3gn78nfhdhqv" path="res://Art/Trash/OrganicOneTrash.png" id="2_mfi3q"]
+[ext_resource type="Texture2D" uid="uid://citq3d3v75u2a" path="res://Art/Trash/OrganicThreeTrash.png" id="3_fgvxy"]
+[ext_resource type="Texture2D" uid="uid://cun0vio0dhwa8" path="res://Art/Trash/OrganicTwoTrash.png" id="4_lpbrf"]
+[ext_resource type="Script" path="res://Scripts/CollisionPolygonResource.gd" id="6_h1sa1"]
+[ext_resource type="Resource" uid="uid://cw8ywluvu0kf8" path="res://Collision/Organic/OrganicOne.tres" id="7_rupop"]
+[ext_resource type="Resource" uid="uid://b3wn87ww22mtu" path="res://Collision/Organic/OrganicThree.tres" id="8_vshhr"]
+[ext_resource type="Resource" uid="uid://b0hxcjyuyujna" path="res://Collision/Organic/OrganicTwo.tres" id="9_qqwwe"]
+
+[node name="OrganicTrash" type="RigidBody2D" node_paths=PackedStringArray("sprite")]
+physics_material_override = ExtResource("1_18yf0")
+gravity_scale = 0.25
+script = ExtResource("1_natel")
+sprite = NodePath("Sprite2D")
+trashSprites = Array[Texture2D]([ExtResource("2_mfi3q"), ExtResource("3_fgvxy"), ExtResource("4_lpbrf")])
+trashCollision = Array[ExtResource("6_h1sa1")]([ExtResource("7_rupop"), ExtResource("8_vshhr"), ExtResource("9_qqwwe")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_lpbrf")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-27, 29, -26, 22, -15, 21, -15, -9, -35, -10, -35, -16, -16, -26, -22, -36, -20, -39, -8, -35, -6, -41, -4, -41, -1, -41, -1, -24, 13, -30, 25, -29, 37, -22, 36, -18, 18, -11, 20, 20, 34, 23, 35, 26, 23, 39, -6, 40, -18, 38)

@@ -1,19 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://jg88rbke78nh"]
+[gd_scene load_steps=9 format=3 uid="uid://jg88rbke78nh"]
 
-[ext_resource type="Texture2D" uid="uid://dbiv1c1k77w6m" path="res://Art/Minigame1/TempPlastic.png" id="1_7lsoo"]
-[ext_resource type="Script" path="res://Scripts/Minigame3-DragSort/Mini3_Trash.gd" id="1_tfn4j"]
+[ext_resource type="Script" path="res://Scripts/Trash/draggable_trash_random.gd" id="1_21qx5"]
+[ext_resource type="Texture2D" uid="uid://r16ghy6fju7f" path="res://Art/Trash/PlasticOneTrash.png" id="2_imqxc"]
+[ext_resource type="Texture2D" uid="uid://f0ysmip5lxom" path="res://Art/Trash/PlasticThreeTrash.png" id="3_pycv7"]
+[ext_resource type="Texture2D" uid="uid://dtsfidq3yfo2f" path="res://Art/Trash/PlasticTwoTrash.png" id="4_su7pd"]
+[ext_resource type="Script" path="res://Scripts/CollisionPolygonResource.gd" id="5_u7skk"]
+[ext_resource type="Resource" uid="uid://1l8d5u2j0sxc" path="res://Collision/Plastic/PlasticOne.tres" id="6_2dko7"]
+[ext_resource type="Resource" uid="uid://dukt0mx7nqktq" path="res://Collision/Plastic/PlasticTwo.tres" id="7_h6so1"]
+[ext_resource type="Resource" uid="uid://dllgmep1p4m85" path="res://Collision/Plastic/PlasticThree.tres" id="8_vf0pm"]
 
 [node name="PlasticTrash" type="CharacterBody2D"]
 collision_layer = 128
 collision_mask = 128
 input_pickable = true
-script = ExtResource("1_tfn4j")
+script = ExtResource("1_21qx5")
+trashSprites = Array[Texture2D]([ExtResource("2_imqxc"), ExtResource("3_pycv7"), ExtResource("4_su7pd")])
+trashCollision = Array[ExtResource("5_u7skk")]([ExtResource("6_2dko7"), ExtResource("7_h6so1"), ExtResource("8_vf0pm")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_7lsoo")
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_pycv7")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-29, -49, -50, -42, -38, -20, 14, 32, 39, 45, 55, 26, 50, 15, 7, -12, -19, -35)
+polygon = PackedVector2Array(34, -23, 35, -41, 13, -52, -10, -55, -22, -52, -30, -37, -29, -22, -30, -3, -37, 51, -31, 55, 6, 57, 14, 49, 20, 6, 21, -6, 26, -16)
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

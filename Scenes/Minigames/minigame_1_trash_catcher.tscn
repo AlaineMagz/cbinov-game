@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ceyg4qs8vej5i"]
+[gd_scene load_steps=30 format=3 uid="uid://ceyg4qs8vej5i"]
 
 [ext_resource type="Script" path="res://Scripts/Minigame1-TrashCatcher/Mini1_Manager.gd" id="1_q2po1"]
 [ext_resource type="Script" path="res://Scripts/Minigame1-TrashCatcher/Mini1_TrashSpawner.gd" id="2_2qf3n"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://duodcn81kqapk" path="res://Art/Minigame1/PlasticBinBack.png" id="9_y0yv8"]
 [ext_resource type="Texture2D" uid="uid://bbolwnwfpip40" path="res://Art/Minigame1/MetalBinFront.png" id="10_4rf81"]
 [ext_resource type="Texture2D" uid="uid://bjly1wraoscq3" path="res://Art/Minigame1/MetalBinBack.png" id="11_i6y5h"]
+[ext_resource type="Texture2D" uid="uid://dmbps3dfv0pvc" path="res://Art/Backgrounds/Polka.png" id="12_im1g4"]
+[ext_resource type="Script" path="res://Scripts/Background/RainbowPolka.gd" id="13_ir4x1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_b0u0n"]
 font_size = 32
@@ -174,7 +176,7 @@ z_index = -1
 texture = ExtResource("11_i6y5h")
 
 [node name="RimCollission" type="CollisionPolygon2D" parent="TrashCan/Bins"]
-polygon = PackedVector2Array(-106, 147, -90, 312, 110, 304, 116, 144, 134, 141, 135, 331, -113, 331, -129, 141)
+polygon = PackedVector2Array(-111, 140.724, -85, 377.598, 113, 373.115, 118, 136.574, 137, 134.03, 129, 402.192, -104, 398.378, -129, 141)
 
 [node name="InteriorArea" type="Area2D" parent="TrashCan/Bins"]
 
@@ -193,6 +195,13 @@ shape = SubResource("RectangleShape2D_h8bvg")
 [node name="Right" type="CollisionShape2D" parent="Walls"]
 position = Vector2(593, 161.5)
 shape = SubResource("RectangleShape2D_sl6l0")
+
+[node name="Background" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.9, 0.9, 1)
+z_index = -3
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("12_im1g4")
+script = ExtResource("13_ir4x1")
 
 [connection signal="timeout" from="TrashSpawner/Timer" to="TrashSpawner" method="_on_timer_timeout"]
 [connection signal="animation_finished" from="TrashCan/AnimationPlayer/AnimationTree" to="TrashCan" method="_on_animation_tree_animation_finished"]

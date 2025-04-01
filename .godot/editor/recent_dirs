@@ -1,3 +1,14 @@
+res://Scripts/Minigame2-BalanceBeam
+res://Collision/Glass
+res://Collision/Organic
+res://Collision/Paper
+res://Collision/Metal
+res://Collision/Plastic
+res://Collision
+res://PhysicsMats
+res://Scripts/Background
+res://Art/Trash
+res://Scripts/Trash
 res://Scenes/Minigames
 res://Scripts/Minigame3-DragSort
 res://Shaders
